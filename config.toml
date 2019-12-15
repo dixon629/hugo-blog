@@ -1,4 +1,14 @@
-baseURL = "http://example.org/"
+baseURL = "https://dixon629.github.io/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Hui's blog"
 theme = "kiera"
+
+[author]
+    name = ""           #Author name
+    github = ""         #Github username
+    gitlab = ""         #Gitlab username
+    linkedin = ""       #LinkedIn username
+    facebook = ""       #Facebook username
+    twitter = ""        #Twitter username
+    instagram = ""      #Instagram username
+    stackoverflow = ""  #StackOverflow username
