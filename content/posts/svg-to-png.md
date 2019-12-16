@@ -26,7 +26,7 @@ And then I found [canvg](https://github.com/gabelerner/canvg) out, *canvg* can p
 
 Eventually I was inspired by the *saveSvgAsPng*. *saveSvgAsPng* will read the used external CSS for SVG and put it into the SVG. So I create a new function in *saveSvgAsPng* called **saveAsSVGWithStyle**.It will return a new SVG with CSS.
 
-{{< highlight javascript >}}
+```javascript
 out$.saveAsSVGWithStyle = function (el, options, cb) {
       options = options || {};
       options.scale = options.scale || 1;
@@ -72,70 +72,70 @@ out$.saveAsSVGWithStyle = function (el, options, cb) {
           }
       });
   }
-{{< /highlight >}}
+```
 
 Then we can convert SVG with CSS to canvas through *canvg*.
-{{< highlight javascript >}}
-              saveAsSVGWithStyle(svgElement.node(), {}, function (svgWithStyle, width, height) {
-                    var canvas = document.createElement('canvas');
-                    canvas.width = scale * width;
-                    canvas.height = scale * height;
-                    canvg(canvas, svgWithStyle, { scaleWidth: canvas.width, scaleHeight: canvas.height, ignoreDimensions: true, ignoreMouse: true, ignoreClear: true });
-                });
-{{< /highlight >}}
+```javascript
+saveAsSVGWithStyle(svgElement.node(), {}, function (svgWithStyle, width, height) {
+    var canvas = document.createElement('canvas');
+    canvas.width = scale * width;
+    canvas.height = scale * height;
+    canvg(canvas, svgWithStyle, { scaleWidth: canvas.width, scaleHeight: canvas.height, ignoreDimensions: true, ignoreMouse: true, ignoreClear: true });
+});
+```
 
 When I tested on different browsers. I found that IE9 doesn't support  SVG **defs**. So I can't just define *defs and put CSS in defs*. I have to add style property to the SVG manually like this. 
 **If you have a better solution to make external CSS into the DOM style property, let me know, thank you.**
-{{< highlight javascript >}}
-            var _appendStylesToSVG = function (svgElement) {
-                svgElement.selectAll('.nvd3 .nv-axis').style('pointer-events', 'none');
-                svgElement.selectAll('.nvd3 .nv-axis path').style('fill', 'none');
-                svgElement.selectAll('.nvd3 .nv-axis path').style('stroke', 'rgb(204, 204, 204)');
-                svgElement.selectAll('.nvd3 .nv-axis path').style('stroke-opacity', '0.75');
-                svgElement.selectAll('.nvd3 .nv-axis path').style('shape-rendering', 'crispedges');
-                svgElement.selectAll('.nvd3 .nv-axis path.domain').style('stroke-opacity', '0.75');
-                svgElement.selectAll('.nvd3 .nv-axis.nv-x path.domain').style('stroke-opacity', '0');
-                svgElement.selectAll('.nvd3 .nv-axis line').style('fill', 'none');
-                svgElement.selectAll('.nvd3 .nv-axis line').style('stroke', 'rgb(229, 229, 229)');
-                svgElement.selectAll('.nvd3 .nv-axis line').style('shape-rendering', 'crispedges');
-                svgElement.selectAll('.nvd3 .nv-axis .zero line, .nvd3 .nv-axis line.zero').style('stroke-opacity', '0.75');
-                svgElement.selectAll('.nvd3 .nv-multibar .nv-groups rect').style('stroke-opacity', '0');
-                svgElement.selectAll('.nvd3 .nv-multibar .nv-groups rect').style('transition', 'fill-opacity 250ms linear 0s');
-                svgElement.selectAll('.nvd3 .nv-multibarHorizontal .nv-groups rect').style('stroke-opacity', '0');
-                svgElement.selectAll('.nvd3 .nv-multibarHorizontal .nv-groups rect').style('transition', 'fill-opacity 250ms linear 0s');
-                svgElement.selectAll('.nvd3 .nv-discretebar .nv-groups rect').style('stroke-opacity', '0');
-                svgElement.selectAll('.nvd3 .nv-discretebar .nv-groups rect').style('transition', 'fill-opacity 250ms linear 0s');
-                svgElement.selectAll('.nv-x .tick line').style('display', 'none');
-                svgElement.selectAll('.statistics-title').style('fill', 'rgba(107, 156, 188, 1)');
-                svgElement.selectAll('.statistics-title').style('font-size', '21px');
-                svgElement.selectAll('.statistics-title').style('font-weight', '300');
-                svgElement.selectAll('.statistics-title-total').style('font-size', '14px');
-                svgElement.selectAll('.statistics-title-total').style('fill', 'rgb(153, 153, 153)');
-                svgElement.selectAll('.statistics-title-total').style('font-weight', '300');
-            };
-{{< /highlight >}}
+```javascript
+var _appendStylesToSVG = function (svgElement) {
+    svgElement.selectAll('.nvd3 .nv-axis').style('pointer-events', 'none');
+    svgElement.selectAll('.nvd3 .nv-axis path').style('fill', 'none');
+    svgElement.selectAll('.nvd3 .nv-axis path').style('stroke', 'rgb(204, 204, 204)');
+    svgElement.selectAll('.nvd3 .nv-axis path').style('stroke-opacity', '0.75');
+    svgElement.selectAll('.nvd3 .nv-axis path').style('shape-rendering', 'crispedges');
+    svgElement.selectAll('.nvd3 .nv-axis path.domain').style('stroke-opacity', '0.75');
+    svgElement.selectAll('.nvd3 .nv-axis.nv-x path.domain').style('stroke-opacity', '0');
+    svgElement.selectAll('.nvd3 .nv-axis line').style('fill', 'none');
+    svgElement.selectAll('.nvd3 .nv-axis line').style('stroke', 'rgb(229, 229, 229)');
+    svgElement.selectAll('.nvd3 .nv-axis line').style('shape-rendering', 'crispedges');
+    svgElement.selectAll('.nvd3 .nv-axis .zero line, .nvd3 .nv-axis line.zero').style('stroke-opacity', '0.75');
+    svgElement.selectAll('.nvd3 .nv-multibar .nv-groups rect').style('stroke-opacity', '0');
+    svgElement.selectAll('.nvd3 .nv-multibar .nv-groups rect').style('transition', 'fill-opacity 250ms linear 0s');
+    svgElement.selectAll('.nvd3 .nv-multibarHorizontal .nv-groups rect').style('stroke-opacity', '0');
+    svgElement.selectAll('.nvd3 .nv-multibarHorizontal .nv-groups rect').style('transition', 'fill-opacity 250ms linear 0s');
+    svgElement.selectAll('.nvd3 .nv-discretebar .nv-groups rect').style('stroke-opacity', '0');
+    svgElement.selectAll('.nvd3 .nv-discretebar .nv-groups rect').style('transition', 'fill-opacity 250ms linear 0s');
+    svgElement.selectAll('.nv-x .tick line').style('display', 'none');
+    svgElement.selectAll('.statistics-title').style('fill', 'rgba(107, 156, 188, 1)');
+    svgElement.selectAll('.statistics-title').style('font-size', '21px');
+    svgElement.selectAll('.statistics-title').style('font-weight', '300');
+    svgElement.selectAll('.statistics-title-total').style('font-size', '14px');
+    svgElement.selectAll('.statistics-title-total').style('fill', 'rgb(153, 153, 153)');
+    svgElement.selectAll('.statistics-title-total').style('font-weight', '300');
+};
+```
 ### Step 2: downloading PNG
 We have to support IE9, but IE9 doesn't support html5 file API. So I did a trik, I sent  base64 string of the image to server-side, server-side would generate a link to client-side, and then download it. The completed codes is
-{{< highlight javascript >}}
-            $scope.exportToPNG = function (chartId,scale) {
-                var svgElement = d3.select("#" + chartId + " svg");
-                //Append styles as there are some problems when drawing PNG on IE 9
-                _appendStylesToSVG(svgElement);
-                var fileName = _buildPNGName(chartId);
-                scale = scale ? scale : 1.5;
+```javascript
+$scope.exportToPNG = function (chartId,scale) {
+    var svgElement = d3.select("#" + chartId + " svg");
+    //Append styles as there are some problems when drawing PNG on IE 9
+    _appendStylesToSVG(svgElement);
+    var fileName = _buildPNGName(chartId);
+    scale = scale ? scale : 1.5;
 
-                saveAsSVGWithStyle(svgElement.node(), {}, function (svgWithStyle, width, height) {
-                        var canvas = document.createElement('canvas');
-                    canvas.width = scale * width;
-                        canvas.height = scale * height;
-                        canvg(canvas, svgWithStyle, { scaleWidth: canvas.width, scaleHeight: canvas.height, ignoreDimensions: true, ignoreMouse: true, ignoreClear: true });
-                        var imageData = canvas.toDataURL("image/png");
-                        imageData = imageData.replace(/^data:image\/(png|jpg);base64,/, "");
-                        statisticalChartsService.saveChartCache(imageData).then(function (response) {
-                            statisticalChartsService.getChartCache(fileName, response.data);
-                        });
-                    });
-            };
-{{< /highlight >}}
+    saveAsSVGWithStyle(svgElement.node(), {}, function (svgWithStyle, width, height) {
+            var canvas = document.createElement('canvas');
+        canvas.width = scale * width;
+            canvas.height = scale * height;
+            canvg(canvas, svgWithStyle, { scaleWidth: canvas.width, scaleHeight: canvas.height, ignoreDimensions: true, ignoreMouse: true, ignoreClear: true });
+            var imageData = canvas.toDataURL("image/png");
+            imageData = imageData.replace(/^data:image\/(png|jpg);base64,/, "");
+            statisticalChartsService.saveChartCache(imageData).then(function (response) {
+                statisticalChartsService.getChartCache(fileName, response.data);
+            });
+        });
+};
+```
 ## Conclusion
 If you'd like to export SVG to PNG on the server-side, **PhantomJs** is a good choise. If you'd like to SVG to PNG on the client-side, you can use **canvg**.  But for **nvd3**, you have to figure out how to add external CSS class to SVG.

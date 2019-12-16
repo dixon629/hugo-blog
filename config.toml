@@ -1,14 +1,38 @@
 baseURL = "https://dixon629.github.io/"
 languageCode = "en-us"
 title = "Hui's blog"
+copyright = "Copyright &copy; 2020 - Hui"
+canonifyurls = true
 theme = "kiera"
 
+paginate = 10
+
+summaryLength = 30
+enableEmoji = true
+pygmentsCodeFences = true
+
 [author]
-    name = ""           #Author name
-    github = ""         #Github username
-    gitlab = ""         #Gitlab username
-    linkedin = ""       #LinkedIn username
-    facebook = ""       #Facebook username
-    twitter = ""        #Twitter username
-    instagram = ""      #Instagram username
-    stackoverflow = ""  #StackOverflow username
+    name = "Hui"
+    github = "dixon629"
+    #gitlab = "username"
+    linkedin = "辉-关-52a96098"
+    #facebook = "username"
+    #twitter = "ds_says"
+    #instagram = "username"
+    #stackoverflow = "username"
+    #youtube = "user/username" # or channel/channelname
+
+[params]
+    tagline = "A Hugo theme for creative and technical writing"
+    description = "Kiera: A Hugo theme for creative and technical writing."
+    #images = [""] #This is used for opengraph/twitter cards.
+    customCSS = []  #Optional Customised CSS
+    #favicon = ""
+
+
+# uncomment to enable the Categories link on the main toolbar
+[[menu.main]]
+     identifier = "categories"
+     name = "Categories"
+     url = "/categories"
+     weight = 2
