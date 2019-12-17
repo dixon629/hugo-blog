@@ -1,6 +1,6 @@
 [submodule "themes/kiera"]
 	path = themes/kiera
-	url = https://github.com/funkydan2/hugo-kiera.git
+	url = git@github.com:dixon629/hugo-kiera.git
 [submodule "public"]
 	path = public
 	url = git@github.com:dixon629/dixon629.github.io.git
